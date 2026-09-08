@@ -1,14 +1,46 @@
-SELECT
-    d.day AS dia_do_mês,
-    d.day_of_week AS dia_semana,
-    d.is_weekend AS fim_de_semana,
-    COUNT(*) AS vendas,
-    SUM(f.total)::NUMERIC(12,2) AS receita,
-    ROUND(AVG(f.rating), 2)  AS avaliacao_media
-FROM dw.fact_sales f
-JOIN dw.dim_date d ON d.date_sk = f.date_sk
-GROUP BY d.day, d.day_of_week, d.is_weekend
-ORDER BY vendas DESC;
+-- SELECT
+--     b.branch_code AS filial,
+--     d.month_name AS mes,
+--     SUM(f.total)::NUMERIC(12, 2) AS receita
+-- FROM dw.fact_sales f
+-- JOIN dw.dim_branch b ON b.branch_sk = f.branch_sk
+-- JOIN dw.dim_date d ON d.date_sk = f.date_sk
+-- GROUP BY ROLLUP(b.branch_code, d.month_name)
+-- HAVING b.branch_code IS NOT NULL AND d.month_name IS NOT NULL
+-- ORDER BY branch_code, d.month_name;
+
+-- SELECT
+--     b.branch_code AS filial,
+--     d.month_name AS mes,
+--     SUM(f.total)::NUMERIC(12, 2) AS receita
+-- FROM dw.fact_sales f
+-- JOIN dw.dim_branch b ON b.branch_sk = f.branch_sk
+-- JOIN dw.dim_date d ON d.date_sk = f.date_sk
+-- GROUP BY ROLLUP(b.branch_code, d.month_name)
+-- HAVING b.branch_code IS NOT NULL
+-- ORDER BY branch_code, d.month_name;
+
+-- SELECT
+--     b.branch_code AS filial,
+--     d.month_name AS mes,
+--     SUM(f.total)::NUMERIC(12, 2) AS receita
+-- FROM dw.fact_sales f
+-- JOIN dw.dim_branch b ON b.branch_sk = f.branch_sk
+-- JOIN dw.dim_date d ON d.date_sk = f.date_sk
+-- GROUP BY ROLLUP(b.branch_code, d.month_name)
+-- ORDER BY branch_code, d.month_name;
+
+-- SELECT
+--     d.day AS dia_do_mês,
+--     d.day_of_week AS dia_semana,
+--     d.is_weekend AS fim_de_semana,
+--     COUNT(*) AS vendas,
+--     SUM(f.total)::NUMERIC(12,2) AS receita,
+--     ROUND(AVG(f.rating), 2)  AS avaliacao_media
+-- FROM dw.fact_sales f
+-- JOIN dw.dim_date d ON d.date_sk = f.date_sk
+-- GROUP BY d.day, d.day_of_week, d.is_weekend
+-- ORDER BY vendas DESC;
 
 -- SELECT
 --     c.customer_type AS tipo,
